@@ -1,6 +1,6 @@
 ---
-title: "Replication of Study X by Sample & Sample (200x, Psychological Science)"
-author: "Replication Author[s] (contact information)"
+title: "Replication of 'Why Do People Tend to Infer Ought From Is? The Role of Biases in Explanation' by Tworek & Cimpian (2016, Psychological Science)"
+author: "Marianna Zhang (marianna.zhang@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   html_document:
@@ -14,7 +14,24 @@ output:
 
 ##Introduction
 
-[No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
+<!-- [No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.-->
+
+<!-- A short justification for your choice of experiment in terms of your research interests or research program (1 paragraph). This justification should tell us why you chose this particular result.-->
+
+Tworek & Cimpian 2016 is a paper that investigates the is-ought fallacy by exploring how people tend to explain what is common (e.g. Roses are commonly gifted on Valentine's Day) in terms of intrinsic properties (e.g. Roses are beautiful), which then promotes normative conclusions about what is good (e.g. It is good to give roses). This paper is relevant to my interest in how we represent categories and how we develop those category representations, including how we represent descriptive and normative dimensions of categories and to what extent those dimensions are separate and to what extent they interact. Tworek & Cimpian 2016 addresses this topic by investigating how our normative beliefs about categories can emerge from descriptive properties of categories. From replicating this paper, I hope to both learn further about a topic relevant to my research area and develop skills in running the kinds of studies used in the course of that research. 
+
+<!-- A description of the stimuli and procedures that will be required to conduct this experiment, and what the challenges will be (1-2 paragraphs).-->
+
+Tworek & Cimpian Experiment 4 follows up on a series of correlational studies with adults and children showing that individuals' preference for intrinsic explanations of common phenomena correlates with their endorsement of normative judgments about common phenomena. Experiment 4 demonstrates the causal link by administering an intervention that reduced people's preference for intrinsic explanations of common phenomena, which consequently reduced people's likelihood of making normative judgments of common phenomena. 
+
+Adults on Mechanical Turk were randomly assigned to an anti-inherence condition where they received the anti-inherence manipulation, or a control condition where they received a control manipulation. The anti-inherence manipulation (previously used in Salomon & Cimpian, 2004) was a 10-item mock scale where each item was a strongly worded extrinsic explanation of a common phenomenon (e.g. "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals) because of effective advertising and marketing by florists- not because flowers effectively convey a variety of sentiments"), and response scales were skewed towards agreement (1 = disagree, 2 = agree somewhat, 3 = agree, 4 = agree very strongly). The control condition received a control version of the anti-inherence manipulation that lacked explanations of any kind (e.g. "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals)""). 
+
+Participants then performed a distractor task (a Where's Waldo? game). Participants then in random order filled out a manipulation check (the inherence bias task) and performed a task measuring their endorsement of normative judgments for common phenomena (the ought task). The inherence bias task consisted of rating agreement with 15 sentences that proposed inherent explanations for common phenomena (e.g. "Black is associated with
+funerals because of something about the color black or about funerals-maybe because the darkness of black conveys how people feel at funerals"). The ought task consisted of reading 6 passages written like press releases that described a common phenomenon (e.g. the popularity of eating pizza among Americans), and then for each passage, answering an ought question about that phenomenon that either used the term "should" or used the term "good" (e.g. "Do you think it should be that so many Americans eat pizza?"), along with 4 filler questions. Finally, participants provided demographics information and were debriefed. The critical analyses were to show that participants who received the anti-inherence manipulation were less likely to endorse normative ought judgments of common phenomena, compared to participants in the control condition, and to show that this effect was mediated by a reduction in participants' inherence bias.
+
+The study will be easy to adminster and run, since it involves surveys administered on MTurk. I have never performed mediation analysis before so that analysis will be a challenge, but others in my lab have, so I believe I will have people to consult and help as needed. 
+
+The [repository for the replication](https://github.com/mariannazhang/tworek2016) and the [original paper](https://github.com/mariannazhang/tworek2016/blob/master/original_paper.pdf) can be found online. 
 
 
 ##Methods
