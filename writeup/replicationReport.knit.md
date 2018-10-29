@@ -2,7 +2,7 @@
 title: Replication of 'Why Do People Tend to Infer Ought From Is? The Role of Biases
   in Explanation' by Tworek & Cimpian (2016, Psychological Science)
 author: "Marianna Zhang (marianna.zhang@stanford.edu)"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: "October 29, 2018"
 output:
   html_document:
     toc: yes
@@ -108,123 +108,7 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 	
-```{r include=F}
-### Data Preparation
-setwd("C:/Users/Marianna/Desktop/Dropbox/Stanford/methods/tworek2016")
-
-
-#### Load Relevant Libraries and Functions
-library(tidyverse)
-library(mediation)
-
-#### Import data
-data <- read.csv("C:/Users/Marianna/Desktop/Dropbox/Stanford/methods/tworek2016/data/pilotA.csv")
-
-
-#### Initial data formatting
-# Remove 2 extra header rows
-data <- data %>% 
-  slice(-1:-2)
-
-# Add subject ID
-data <- mutate(data, subject = row_number())
-
-# Remove Likert scale labels
-data <- data %>% 
-  lapply(function(x) 
-    {gsub("Do not agree |Agree somewhat |Agree very strongly |
-          Disagree strongly |Neither agree nor disagree |Agree strongly | 
-          Agree | Disagree |
-          Definitely no |Definitely yes |
-          Really good |Really not good"
-          , '', x)})
-data <- as.data.frame(data)
-
-
-#### Data exclusion / filtering
-data <- data %>%
-  filter(consent == "I do not agree" | # Exclude those who didn't give consent
-         attn == "No" | # Exclude those who didn't pay attention
-        "IH.C1" >=5 | "IH.C2" >=5 | "IH.C3" <= 5 | "IH.C4" <= 5) # Exclude those who failed control questions on the inherence heuristic scale
-
-
-#### Prepare data for analysis - create columns etc.
 
 
 
-## currently up to here
 
-
-# select relevant columns
-View(data)
-data <- data %>%
-  select(subject, # subject ID 
-         "IH.1":"IH.15", # inherence heuristic scale
-         "O.1", "O.2", "O.3", "O.4", "O.5", "O.6", # ought inferences
-         "Gender":"English", # demographics
-         condition, # control (=0) or anti-inherence treatment (=1)
-         surveyOrder) # inherence heuristic scale first (=1) vs ought inferences first (=2)
-
-# gather to tidy long form
-data <- data %>% 
-  gather(Measurement, Value)
-
-# summarize inherence bias and ought measure for each subject
-data_means <- data %>%
-  group_by(condition) %>%
-  summarize(IH = mean(IH),
-            IH_sd = sd(IH),
-            IH_n = length(IH),
-            ought = mean(ought),
-            ought_sd = sd(ought),
-            ought_n = length(ought))
-
-```
-
-### Confirmatory analysis
-
-The analyses as specified in the analysis plan. 
-*Side-by-side graph with original graph is ideal here*
-
-```{r include=F}
-# Manipulation check: t-test between conditions on inherence heuristic scale
-t-test(antiIH_IH, control_IH)
-
-# Effects of manipulation on ought inferences: t-test between conditions on ought measure
-t-test(antiIH_ought, control_ought)
-
-# Effects of manipulation on ought inferences via inherence bias: mediation analysis from condition to inherence heuristic scale to ought measure
-# condition to ought measure
-model.0 <- lm(ought ~ condition, myData)
-summary(model.0)
-
-# condition to inherence bias
-model.IH <- lm(IH ~ condition, data)
-summary(model.IH)
-
-# condition and inherence bias to ought measure
-model.ought <- lm(ought ~ condition + IH, data)
-summary(model.Y)
-
-results <- mediate(model.IH, model.ought, treat='condition', mediator='IH',
-                   boot=TRUE, sims=500)
-summary(results)
-
-# Original graph
-![Original graph](C:\Users\Marianna\Desktop\Dropbox\Stanford\methods\tworek2016\original_paper_Exp4_Fig2.png)
-
-```
-
-###Exploratory analyses
-
-Any follow-up analyses desired (not required).  
-
-## Discussion
-
-### Summary of Replication Attempt
-
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
-
-### Commentary
-
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
