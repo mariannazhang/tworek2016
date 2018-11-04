@@ -41,22 +41,30 @@ The [repository for the replication](https://github.com/mariannazhang/tworek2016
 
 ###Power Analysis
 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size. Considerations of feasibility for selecting planned sample size.
+The original effect size was derived from the reported indirect effect, standard error, and n for the mediation analysis.
+```{r include=F}
+ab <- -0.07
+se <- 0.02
+n <- mean(132, 135)
+sd <- se*sqrt(n)
+d <- ab/sd
+```
+Cohen's d was found to be -0.304, which for 80% power, required n=135 in each condition for a total of n=270. 
 
-I do not yet know how to do a power analysis.
+This sample size is similar to the original sample size of n=132 in the anti-inherence condition and n=135 in the control condition, for a total of n=267.
 
 ###Planned Sample
 
 <!-- Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.-->
 
-Planned sample size is 300 adults recruited on Amazon Mechanical Turk. Participants will be required to be located within the United States, and will be required to have a HIT acceptance rate of 80% or above.
+Planned sample size is 270 adults recruited on Amazon Mechanical Turk. Participants will be required to be located within the United States, and will be required to have a HIT acceptance rate of 80% or above.
 
 ###Materials
 <!-- All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
-The following manipulation and materials were followed precisely: 
+The following manipulation and materials were followed precisely, besides for sample size:
 
-"We used a manipulation that has previously been found to lower the inherence bias in participants' explanations (Salomon & Cimpian, 2014). This manipulation consisted of a 10-item mock scale; its purpose was not to assess some construct or other but rather to temporarily alter participants' habitual thinking patterns (e.g., Bryan, Dweck, Ross, Kay, & Mislavsky, 2009). Participants were randomly assigned to either an anti-inherence condition (n = ?, original study = 132) or to a control condition (n = ?, original study = 135). The mock scale in the anti-inherence condition was designed to influence participants' explanatory intuitions by exposing them to strongly worded extrinsic explanations: for example, "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals) because of effective advertising and marketing by florists- not because flowers effectively convey a variety of sentiments" or "The only reason our paper, money, and books are rectangular is historical happenstance." To maximize the influence of these extrinsic primes, we also used response scales that were skewed toward agreement (1 = disagree, 2 = agree somewhat, 3 = agree, 4 = agree very strongly). The mock scale in the control condition was matched in content but did not contain any explanations: for example, "People often give flowers as gifts on a variety of different occasions (e.g., Valentine's Day, funerals)" or "Most books, paper, and money are rectangular in shape.""
+"We used a manipulation that has previously been found to lower the inherence bias in participants' explanations (Salomon & Cimpian, 2014). This manipulation consisted of a 10-item mock scale; its purpose was not to assess some construct or other but rather to temporarily alter participants' habitual thinking patterns (e.g., Bryan, Dweck, Ross, Kay, & Mislavsky, 2009). Participants were randomly assigned to either an anti-inherence condition (n = 132) or to a control condition (n = 135). The mock scale in the anti-inherence condition was designed to influence participants' explanatory intuitions by exposing them to strongly worded extrinsic explanations: for example, "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals) because of effective advertising and marketing by florists- not because flowers effectively convey a variety of sentiments" or "The only reason our paper, money, and books are rectangular is historical happenstance." To maximize the influence of these extrinsic primes, we also used response scales that were skewed toward agreement (1 = disagree, 2 = agree somewhat, 3 = agree, 4 = agree very strongly). The mock scale in the control condition was matched in content but did not contain any explanations: for example, "People often give flowers as gifts on a variety of different occasions (e.g., Valentine's Day, funerals)" or "Most books, paper, and money are rectangular in shape.""
 
 ###Procedure	
 
@@ -66,6 +74,7 @@ The following procedure was followed precisely:
 
 "After the manipulation, participants completed a brief distractor task (a "Where's Waldo?" game). They then filled out two measures, in random order: a check for the effectiveness of the manipulation (the Inherence Heuristic Scale; Salomon & Cimpian, 2014) and an ought measure, which was the same as in Study 1 (alpha = .63; lowest item-total correlation = .46). At the end of the study, participants completed a demographics questionnaire and a debriefing."
 
+The survey paradigm, an exact copy of the original survey paradigm, can be found [on Qualtrics](https://stanforduniversity.qualtrics.com/jfe/form/SV_2tzxxFTwuupTmEl).
 
 ###Analysis Plan
 
@@ -117,67 +126,54 @@ setwd("C:/Users/Marianna/Desktop/Dropbox/Stanford/methods/tworek2016")
 library(tidyverse)
 library(mediation)
 
+
 #### Import data
-data <- read.csv("C:/Users/Marianna/Desktop/Dropbox/Stanford/methods/tworek2016/data/pilotA.csv")
+data <- read_csv("data/pilotA.csv")
 
 
 #### Initial data formatting
-# Remove 2 extra header rows
-data <- data %>% 
-  slice(-1:-2)
+# Filter out those who didn't consent
+data <- data %>%
+  filter(consent == "I agree") # Exclude those who didn't give consent
+
+# select relevant columns
+data <- data %>%
+  dplyr::select(IH_1:IH_C4, # inherence heuristic scale
+         O_1, O_2, O_3, O_4, O_5, O_6, # ought inferences
+         condition, # control (=control) or anti-inherence treatment (=anti_inherence)
+         SurveyOrder, # inherence heuristic scale first (=IH_O) vs ought inferences first (=O_IH)
+         attn)# attention check
 
 # Add subject ID
 data <- mutate(data, subject = row_number())
 
-# Remove Likert scale labels
+# Remove all strings (mainly Likert scale labels)
 data <- data %>% 
-  lapply(function(x) 
-    {gsub("Do not agree |Agree somewhat |Agree very strongly |
-          Disagree strongly |Neither agree nor disagree |Agree strongly | 
-          Agree | Disagree |
-          Definitely no |Definitely yes |
-          Really good |Really not good"
-          , '', x)})
-data <- as.data.frame(data)
+  mutate_at(vars(IH_1:O_6), ~gsub("([a-z]|[A-Z]|\\s)*", "", .)) %>% 
+  mutate_at(vars(IH_1:O_6), as.numeric)
 
 
 #### Data exclusion / filtering
 data <- data %>%
-  filter(consent == "I do not agree" | # Exclude those who didn't give consent
-         attn == "No" | # Exclude those who didn't pay attention
-        "IH.C1" >=5 | "IH.C2" >=5 | "IH.C3" <= 5 | "IH.C4" <= 5) # Exclude those who failed control questions on the inherence heuristic scale
+  filter(attn == "Yes" | # Exclude those who didn't pay attention
+        IH_C1 <=5 | IH_C2 <=5 | IH_C3 >= 5 | IH_C4 >= 5) %>% # Exclude those who failed control questions on the inherence heuristic scale 
+  dplyr::select(-attn, -(IH_C1:IH_C4)) # Delete attn and inherence heuristic scale control columns
 
 
 #### Prepare data for analysis - create columns etc.
-
-
-
-## currently up to here
-
-
-# select relevant columns
-View(data)
-data <- data %>%
-  select(subject, # subject ID 
-         "IH.1":"IH.15", # inherence heuristic scale
-         "O.1", "O.2", "O.3", "O.4", "O.5", "O.6", # ought inferences
-         "Gender":"English", # demographics
-         condition, # control (=0) or anti-inherence treatment (=1)
-         surveyOrder) # inherence heuristic scale first (=1) vs ought inferences first (=2)
-
 # gather to tidy long form
-data <- data %>% 
-  gather(Measurement, Value)
+data_tidy <- data %>% 
+  gather(question, response, IH_1:O_6)
 
-# summarize inherence bias and ought measure for each subject
-data_means <- data %>%
-  group_by(condition) %>%
-  summarize(IH = mean(IH),
-            IH_sd = sd(IH),
-            IH_n = length(IH),
-            ought = mean(ought),
-            ought_sd = sd(ought),
-            ought_n = length(ought))
+# classify items as inherence heuristic questions vs ought questions
+data_tidy <- data_tidy %>% 
+  separate(question, c("question_type", "question_number"), "_")
+
+# summarize inherence bias average and ought measure average across conditions
+data_means <- data_tidy %>%
+  group_by(condition, question_type) %>% 
+  summarize(avg=mean(response, na.rm=TRUE), sd=sd(response, na.rm=TRUE), n())
+View(data_means)
 
 ```
 
@@ -187,27 +183,40 @@ The analyses as specified in the analysis plan.
 *Side-by-side graph with original graph is ideal here*
 
 ```{r include=F}
-# Manipulation check: t-test between conditions on inherence heuristic scale
-t-test(antiIH_IH, control_IH)
+## Manipulation check: t-test between conditions on inherence heuristic scale
+t.test(response ~ condition, data_tidy, subset = question_type == "IH")
 
-# Effects of manipulation on ought inferences: t-test between conditions on ought measure
-t-test(antiIH_ought, control_ought)
+## Effects of manipulation on ought inferences: t-test between conditions on ought measure
+t.test(response ~ condition, data_tidy, subset = question_type == "O")
 
-# Effects of manipulation on ought inferences via inherence bias: mediation analysis from condition to inherence heuristic scale to ought measure
-# condition to ought measure
-model.0 <- lm(ought ~ condition, myData)
+
+## Effects of manipulation on ought inferences via inherence bias: mediation analysis from condition to inherence heuristic scale to ought measure
+
+# Average inherence bias and ought measure per subject
+data_means_subj <- data_tidy %>% 
+  group_by(subject, condition, question_type) %>%  
+  summarize(avg=mean(response, na.rm=TRUE)) %>% 
+  spread(question_type, avg)
+
+# condition coded as 0 (=control) or 1 (=anti_inherence) facotr
+data_means_subj$condition <- gsub('control', '0', data_means_subj$condition)
+data_means_subj$condition <- gsub('anti_inherence', '1', data_means_subj$condition)
+data_means_subj$condition <- as.numeric(as.character(data_means_subj$condition))
+
+# condition to ought measure (x->y)
+model.0 <- lm(O ~ condition, data_means_subj)
 summary(model.0)
 
-# condition to inherence bias
-model.IH <- lm(IH ~ condition, data)
-summary(model.IH)
+# condition to inherence bias (x->m)
+model.M <- lm(IH ~ condition, data_means_subj)
+summary(model.M)
 
-# condition and inherence bias to ought measure
-model.ought <- lm(ought ~ condition + IH, data)
+# condition and inherence bias to ought measure (x+m -> y)
+model.Y <- lm(O ~ condition + IH, data_means_subj)
 summary(model.Y)
 
-results <- mediate(model.IH, model.ought, treat='condition', mediator='IH',
-                   boot=TRUE, sims=500)
+set.seed(1234)
+results <- mediation::mediate(model.M, model.Y, treat="condition", mediator="IH", boot=TRUE, sims=500)
 summary(results)
 
 # Original graph
