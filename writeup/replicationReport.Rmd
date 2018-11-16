@@ -74,7 +74,7 @@ The following procedure was followed precisely:
 
 "After the manipulation, participants completed a brief distractor task (a "Where's Waldo?" game). They then filled out two measures, in random order: a check for the effectiveness of the manipulation (the Inherence Heuristic Scale; Salomon & Cimpian, 2014) and an ought measure, which was the same as in Study 1 (alpha = .63; lowest item-total correlation = .46). At the end of the study, participants completed a demographics questionnaire and a debriefing."
 
-The survey paradigm, an exact copy of the original survey paradigm, can be found [on Qualtrics](https://stanforduniversity.qualtrics.com/jfe/form/SV_2tzxxFTwuupTmEl).
+The survey paradigm, a copy of the original survey paradigm, can be found [on Qualtrics](https://stanforduniversity.qualtrics.com/jfe/form/SV_2tzxxFTwuupTmEl). The only change was that in demographics, participants were asked for their age instead of DOB out of concerns about identifiable information.
 
 ###Analysis Plan
 
@@ -97,7 +97,7 @@ Whether the anti-inherence manipulation's effect on ought inferences was mediate
 
 <!-- Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.-->
 
-The original study recruited participants from both Amazon Mechanical Turk and a university subject pool. In this replication, participants will only be recruited from Amazon Mechanical Turk for convenience. This change in the sample is not predicted to affect the result of the replication, since participants on Amazon Mechanical Turk behave similarly to participants in university subject pools.
+The original study recruited participants from both Amazon Mechanical Turk and a university subject pool. In this replication, participants will only be recruited from Amazon Mechanical Turk for convenience. This change in the sample is not predicted to affect the result of the replication, since participants on Amazon Mechanical Turk behave similarly to participants in university subject pools. In addition, in the demographics section, participants were asked for their age instead of their date of birth out of concerns about identifiable information. This change should have no affect on the result, since demographics is the final task and no analysis was performed on demographic information.
 
 ### Methods Addendum (Post Data Collection)
 
@@ -178,7 +178,7 @@ data_tidy <- data_tidy %>%
 data_means <- data_tidy %>%
   group_by(condition, question_type) %>% 
   summarize(avg=mean(response, na.rm=TRUE), sd=sd(response, na.rm=TRUE), n())
-View(data_means)
+data_means
 
 ```
 
