@@ -133,7 +133,7 @@ library(mediation)
 
 
 #### Import data
-data <- read_csv("data/pilotA.csv")
+data <- read_csv("../data/pilotB.csv")
 
 
 #### Initial data formatting
