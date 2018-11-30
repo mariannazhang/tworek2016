@@ -26,13 +26,11 @@ Tworek & Cimpian 2016 is a paper that investigates the is-ought fallacy by explo
 
 <!-- A description of the stimuli and procedures that will be required to conduct this experiment, and what the challenges will be (1-2 paragraphs).-->
 
-Tworek & Cimpian Experiment 4 follows up on a series of correlational studies with adults and children showing that individuals' preference for intrinsic explanations of common phenomena correlates with their endorsement of normative judgments about common phenomena. Experiment 4 demonstrates the causal link by administering an intervention that reduced people's preference for intrinsic explanations of common phenomena, which consequently reduced people's likelihood of making normative judgments of common phenomena. 
+Tworek & Cimpian Experiment 1 shows that individuals' preference for intrinsic explanations of common phenomena correlates with their endorsement of normative judgments about common phenomena. 
 
-Adults on Mechanical Turk were randomly assigned to an anti-inherence condition where they received the anti-inherence manipulation, or a control condition where they received a control manipulation. The anti-inherence manipulation (previously used in Salomon & Cimpian, 2004) was a 10-item mock scale where each item was a strongly worded extrinsic explanation of a common phenomenon (e.g. "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals) because of effective advertising and marketing by florists- not because flowers effectively convey a variety of sentiments"), and response scales were skewed towards agreement (1 = disagree, 2 = agree somewhat, 3 = agree, 4 = agree very strongly). The control condition received a control version of the anti-inherence manipulation that lacked explanations of any kind (e.g. "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals)""). 
+Adults on Mechanical Turk were administered a task that assessed their preference for inherent explanatiosn of common phenomena (inherence bias measure) and a task that assessed their endorsement of normative judgments for common phenomena (ought measure), in random order. The inherence bias task consisted of rating agreement with 15 sentences that proposed inherent explanations for common phenomena (e.g. "Black is associated with funerals because of something about the color black or about funerals-maybe because the darkness of black conveys how people feel at funerals"). The ought task consisted of reading 6 passages written like press releases that described a common phenomenon (e.g. the popularity of eating pizza among Americans), and then for each passage, answering an ought question about that phenomenon that either used the term "should" or used the term "good" (e.g. "Do you think it should be that so many Americans eat pizza?"), along with 4 filler questions. Finally, participants provided demographics information and were debriefed. The critical analyses was to show that participants' inherence bias measure was positively correlated with their ought measure. In other words, participants' preference for inherence explanations for common phenomena is correlated with their likelihood of endorsing normative ought judgments of common phenomena.
 
-Participants then performed a distractor task (a Where's Waldo? game). Participants then in random order filled out a manipulation check (the inherence bias task) and performed a task measuring their endorsement of normative judgments for common phenomena (the ought task). The inherence bias task consisted of rating agreement with 15 sentences that proposed inherent explanations for common phenomena (e.g. "Black is associated with funerals because of something about the color black or about funerals-maybe because the darkness of black conveys how people feel at funerals"). The ought task consisted of reading 6 passages written like press releases that described a common phenomenon (e.g. the popularity of eating pizza among Americans), and then for each passage, answering an ought question about that phenomenon that either used the term "should" or used the term "good" (e.g. "Do you think it should be that so many Americans eat pizza?"), along with 4 filler questions. Finally, participants provided demographics information and were debriefed. The critical analyses were to show that participants who received the anti-inherence manipulation were less likely to endorse normative ought judgments of common phenomena, compared to participants in the control condition, and to show that this effect was mediated by a reduction in participants' inherence bias.
-
-The study will be easy to adminster and run, since it involves surveys administered on MTurk. I have never performed mediation analysis before so that analysis will be a challenge, but others in my lab have, so I believe I will have people to consult and help as needed. 
+The study will be easy to adminster and run, since it involves surveys administered on MTurk. 
 
 The [repository for the replication](https://github.com/mariannazhang/tworek2016) and the [original paper](https://github.com/mariannazhang/tworek2016/blob/master/original_paper.pdf) can be found online. 
 
@@ -41,40 +39,51 @@ The [repository for the replication](https://github.com/mariannazhang/tworek2016
 
 ###Power Analysis
 
-The original effect size was derived from the reported indirect effect, standard error, and n for the mediation analysis.
-```{r include=F}
-ab <- -0.07
-se <- 0.02
-n <- mean(132, 135)
-sd <- se*sqrt(n)
-d <- ab/sd
-```
-Cohen's d was found to be -0.304, which for 80% power, required n=135 in each condition for a total of n=270. 
+The original effect size was r=0.30. For 80% power, this effect size requires n=82. 
 
-This sample size is similar to the original sample size of n=132 in the anti-inherence condition and n=135 in the control condition, for a total of n=267.
+This sample size is smaller than the original sample size of n=122, which achieved a post-hoc power of 93%.
 
 ###Planned Sample
 
 <!-- Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.-->
 
-Planned sample size is 270 adults recruited on Amazon Mechanical Turk. Participants will be required to be located within the United States, and will be required to have a HIT acceptance rate of 80% or above.
+Planned sample size is 82 adults recruited on Amazon Mechanical Turk. Participants will be required to be located within the United States, and will be required to have a HIT acceptance rate of 80% or above.
 
 ###Materials
 <!-- All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
-The following manipulation and materials were followed precisely, besides for sample size:
+The following materials were used:
 
-"We used a manipulation that has previously been found to lower the inherence bias in participants' explanations (Salomon & Cimpian, 2014). This manipulation consisted of a 10-item mock scale; its purpose was not to assess some construct or other but rather to temporarily alter participants' habitual thinking patterns (e.g., Bryan, Dweck, Ross, Kay, & Mislavsky, 2009). Participants were randomly assigned to either an anti-inherence condition (n = 132) or to a control condition (n = 135). The mock scale in the anti-inherence condition was designed to influence participants' explanatory intuitions by exposing them to strongly worded extrinsic explanations: for example, "We give flowers as gifts for a variety of occasions (e.g., Valentine's Day, funerals) because of effective advertising and marketing by florists- not because flowers effectively convey a variety of sentiments" or "The only reason our paper, money, and books are rectangular is historical happenstance." To maximize the influence of these extrinsic primes, we also used response scales that were skewed toward agreement (1 = disagree, 2 = agree somewhat, 3 = agree, 4 = agree very strongly). The mock scale in the control condition was matched in content but did not contain any explanations: for example, "People often give flowers as gifts on a variety of different occasions (e.g., Valentine's Day, funerals)" or "Most books, paper, and money are rectangular in shape.""
+"*Ought inferences.* Participants read six passages that were structured like and derived from actual press releases. The passages described a typical societal practice (i.e., what is). For example, one was titled "America's Pizza Obsession: By The Numbers" and read as follows:
+
+>The quintessential American food may be apple pie, but its popularity pales beside our national love affair with pizza pies. The Daily reports that Americans consume a staggering 100 acres of pizza a day, according to data from the National Association of Pizza Operators (NAPO). Over $38 billion of pizza is sold in America annually, according to Pizza Today, and 3 billion pizzas are sold in the U.S. each year according to NAPO. 350 slices of pizza are sold every second, according to NAPO, and the average American eats an average of 46 slices of pizza a year, according to Packaged Facts. Overall, a total of 94% of Americans eat pizza (adapted from "America's pizza obsession: By the numbers," 2011). 
+
+After reading each press release, participants were asked five questions: one ought question (e.g., "Do you think it should be that so many Americans eat pizza?" 1 = definitely no, 9 = definitely yes) and four filler questions that served to camouflage the main focus of the study (e.g., "Do you think the amount of pizza sold will grow in the next 5 years?" "What do you think accounts for the current prices of pizza?"). For three of the press releases, the ought question was phrased with "should" (see the example in the first sentence of this paragraph), and for the other three, the ought questions were phrased with "good" - for example, "Do you think that it's good that so many Americans drive to work?" (1 = really not good, 9 = really good), which was presented after a passage claiming that 88% of Americans drive to work. Participants' average scores for the "good" and "should" questions were significantly correlated, r(122) = .37, 95% confidence interval (CI) = [.20, .51], p < .001. 
+
+Note that the press releases were purposely about behaviors that fall outside the scope of most existing accounts of sociomoral reasoning (eating pizza, driving to work, drinking coffee, owning a TV, using e-mail, and watching football) so that our results would highlight the unique contribution of our account. All passages were factual in tone, without evaluative language, to avoid influencing participants' normative judgments (for the full text of the passages, see the Supplemental Material at Open Science Framework, https://osf.io/4kanr/).
+
+Responses to the six ought questions were averaged into a composite score, which we refer to as the ought measure (\alpha = .58). The lowest correlation between a particular question and the average of all six questions (i.e., the lowest item-total correlation) was .33. (Note that the results remained the same when excluding the item with the lowest item-total correlation.) The ought measure served as our main dependent variable.
+
+*Inherence bias.* Fifteen items were used to assess the extent to which participants preferred explanations in terms of inherent facts (e.g., "Black is associated with funerals because of something about the color black or about funerals - maybe because the darkness of black conveys how people feel at funerals"; \alpha = .85; lowest item total correlation = .47; see Table 1 for other sample items). All items were rated using a 9-point scale (1 = disagree strongly, 9 = agree strongly) and were presented in random order. Note that, as with the ought measure, the items in the measure of inherence bias were worded factually and did not contain evaluative language. Two catch items were included to detect inattention (e.g., "Please click on the number three below to indicate that you are paying attention"). Participants who missed either of these attention checks were excluded (n = 7).
+
+*Control measures.* Four control measures were administered to investigate alternative explanations for the predicted relationship between participants' explanations and their ought inferences. These measures tapped into dimensions that could influence both variables of interest, giving rise to a correlation between them in the absence of a causal relationship. First, we measured participants' level of education using a scale from 1, less than high school, to 6, doctoral (Ph.D., J.D., M.D.). Second, we measured their fluid intelligence with one 12-item set of Raven's Progressive Matrices (Raven, 1960; see also Salomon & Cimpian, 2014). Third, we measured participants' political views: "How would you describe your political attitudes?" (1 = strongly liberal, 9 = strongly conservative). (Because higher scores on this measure indicate more conservative attitudes, we occasionally refer to it as a measure of conservatism.)
+
+Fourth, a measure related to the measure of political views assessed participants' belief in a just world: for example, "Basically, the world is a just place" (1 = disagree strongly, 9 = agree strongly; Rubin & Peplau, 1975). Table S1 in the Supplemental Material (at Open Science Framework, https://osf.io/4kanr/) provides descriptive statistics for these measures."
+
+
+Two control measures - belief-in-a-just-world scale, Raven's Progressive Matrices - were omitted for reasons of study duration and costs, and since the original study found a significant correlation between inherence bias measure and ought measure even without controlling for any of the four control measures. 
 
 ###Procedure	
 
 <!-- Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
-The following procedure was followed precisely:
+The following procedure was followed, with exceptions noted below:
 
-"After the manipulation, participants completed a brief distractor task (a "Where's Waldo?" game). They then filled out two measures, in random order: a check for the effectiveness of the manipulation (the Inherence Heuristic Scale; Salomon & Cimpian, 2014) and an ought measure, which was the same as in Study 1 (alpha = .63; lowest item-total correlation = .46). At the end of the study, participants completed a demographics questionnaire and a debriefing."
+"Participants were tested online via Qualtrics (Qualtrics Labs Inc., Provo, UT). The ought measure, the measure of inherence bias, the belief-in-a-just-world scale, and Raven's Progressive Matrices were presented in random order. Item order was randomized for all scales except Raven's Progressive Matrices, which were presented in increasing order of difficulty. The measures of participants' education and conservatism were administered at the end of the sessions, along with other demographic questions. Finally, participants were debriefed."
 
-The survey paradigm, a copy of the original survey paradigm, can be found [on Qualtrics](https://stanforduniversity.qualtrics.com/jfe/form/SV_2tzxxFTwuupTmEl). The only change was that in demographics, participants were asked for their age instead of DOB out of concerns about identifiable information.
+The ought measure and inherence bias were presented in random order. Two control measures - belief-in-a-just-world scale and fluid intelligence (a 12-item set of Raven's Progressive Matrices) - were omitted for reasons of study duration and costs, and since the original study found a significant correlation between inherence bias measure and ought measure even without controlling for any of the four control measures. In demographics, participants were asked for their age instead of DOB out of concerns about identifiable information.
+
+The survey paradigm, adapted from the original survey paradigm, can be found [on Qualtrics](https://stanforduniversity.qualtrics.com/jfe/form/SV_298GpHbVEYbI5GB). 
 
 ###Analysis Plan
 
@@ -83,21 +92,21 @@ The survey paradigm, a copy of the original survey paradigm, can be found [on Qu
 **Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.-->
 
 ####Exclusion criteria
-Participants will be excluded if they respond in the unexpected agree/disagree direction to more than one of the catch items on the Inherence Heuristic Scale manipulation catch, or if they indicate during debriefing that they had not paid attention. 
+Participants will be excluded if they do not provide the answer they are told to provide to any of the two catch items on the Inherence Heuristic Scale manipulation catch, or if they indicate during debriefing that they had not paid attention. 
 
-####Manipulation check. 
-Whether the anti-inherence manipulation actually did decrease participants' inherence bias will be tested by a t-test comparing the means of participants' scores on the Inherence Heuristic Scale in the anti-inherence vs control conditions. The mean of participants' scores on the Inherence Heuristic Scale in the anti-inherence condition should be significantly lower than the mean of participants in the control condition. 
+####Analysis of interest
+A Pearson correlation will be derived between subjects' inherence bias measure and ought measure. The Pearson correlation is expected to be positive and statistically significant (p<0.05).
 
-####Whether the anti-inherence manipulation affected ought inferences.
-Whether the anti-inherence manipulation decreased ought inferences will be tested by a t-test comparing the means of participants' scores on the ought measure in the anti-inherence vs control conditions. The mean of participants' ought measures in the anti-inherence condition should be significantly lower than the mean of participants in the control condition.
-
-Whether the anti-inherence manipulation's effect on ought inferences was mediated by the manipulation's effect on inherent explanations will be tested by a boot-strapped product-of-coefficents mediation analysis. The indirect effect should be significant. 
 
 ###Differences from Original Study
 
 <!-- Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.-->
 
-The original study recruited participants from both Amazon Mechanical Turk and a university subject pool. In this replication, participants will only be recruited from Amazon Mechanical Turk for convenience. This change in the sample is not predicted to affect the result of the replication, since participants on Amazon Mechanical Turk behave similarly to participants in university subject pools. In addition, in the demographics section, participants were asked for their age instead of their date of birth out of concerns about identifiable information. This change should have no affect on the result, since demographics is the final task and no analysis was performed on demographic information.
+Two control measures, fluid intelligence (Raven's Progressive Matrices) and belief-in-a-just-world, were omitted out of cost concerns. The final analysis in this study finds the Pearson correlation between subjects' inherence bias measure and ought measure, without controlling for any control measures. Given that the original study reported a significant correlation without controlling for any control measures, as well as a significant correlation with controlling for control measures, this analysis plan is also expected to find a significant correlation without controlling for any control measures. Controlling for control measures should increase the signal, so failing to control for the control measures should merely add noise.
+
+In addition, the original study paid its Amazon Mechanical Turk participants 75 cents for completing the study. In this replication, participants will be paid 1.25, which is the current federal minimum wage for the expected time to completion. This increase in subject payment is not predicted to affect the result of the replication, since the increase is a trivial amount. 
+
+Finally, in the demographics section, participants are asked for their age instead of their date of birth out of concerns about identifiable information. This change should have no affect on the result, since demographics is the final task and no analysis was performed on demographic information.
 
 ### Methods Addendum (Post Data Collection)
 
@@ -119,7 +128,6 @@ Data preparation following the analysis plan.
 
 ```{r "knitr config", cache = FALSE, include=FALSE}
 require("knitr")
-opts_knit$set(root.dir = "C:/Users/Marianna/Desktop/Dropbox/Stanford/methods/tworek2016")
 ```
 
 
@@ -129,11 +137,11 @@ opts_knit$set(root.dir = "C:/Users/Marianna/Desktop/Dropbox/Stanford/methods/two
 
 #### Load Relevant Libraries and Functions
 library(tidyverse)
-library(mediation)
 
 
-#### Import data
-data <- read_csv("../data/pilotB.csv")
+
+#### Import data for analysis
+data <- read_csv("../data/Exp1_pilotA.csv")
 
 
 #### Initial data formatting
@@ -143,10 +151,8 @@ data <- data %>%
 
 # select relevant columns
 data <- data %>%
-  dplyr::select(IH_1:IH_C4, # inherence heuristic scale
+  dplyr::select(IH_1:IH_C2, # inherence heuristic scale
          O_1, O_2, O_3, O_4, O_5, O_6, # ought inferences
-         condition, # control (=control) or anti-inherence treatment (=anti_inherence)
-         SurveyOrder, # inherence heuristic scale first (=IH_O) vs ought inferences first (=O_IH)
          attn)# attention check
 
 # Add subject ID
@@ -161,8 +167,8 @@ data <- data %>%
 #### Data exclusion / filtering
 data <- data %>%
   filter(attn == "Yes" | # Exclude those who didn't pay attention
-        IH_C1 <=5 | IH_C2 <=5 | IH_C3 >= 5 | IH_C4 >= 5) %>% # Exclude those who failed control questions on the inherence heuristic scale 
-  dplyr::select(-attn, -(IH_C1:IH_C4)) # Delete attn and inherence heuristic scale control columns
+        IH_C1 !=3 | IH_C2 !=7) %>% # Exclude those who failed control questions on the inherence heuristic scale 
+  dplyr::select(-attn, -(IH_C1:IH_C2)) # Delete attn and inherence heuristic scale control columns
 
 
 #### Prepare data for analysis - create columns etc.
@@ -174,11 +180,18 @@ data_tidy <- data %>%
 data_tidy <- data_tidy %>% 
   separate(question, c("question_type", "question_number"), "_")
 
-# summarize inherence bias average and ought measure average across conditions
+# summarize inherence bias average and ought measure average across subjects
 data_means <- data_tidy %>%
-  group_by(condition, question_type) %>% 
+  group_by(question_type) %>% 
   summarize(avg=mean(response, na.rm=TRUE), sd=sd(response, na.rm=TRUE), n())
 data_means
+
+# summarize inherence bias and ought measure per subject
+data_means_subj <- data_tidy %>% 
+  group_by(subject, question_type) %>%  
+  summarize(avg=mean(response, na.rm=TRUE)) %>% 
+  spread(question_type, avg)
+data_means_subj
 
 ```
 
@@ -188,45 +201,11 @@ The analyses as specified in the analysis plan.
 *Side-by-side graph with original graph is ideal here*
 
 ```{r include=F}
-## Manipulation check: t-test between conditions on inherence heuristic scale
-t.test(response ~ condition, data_tidy, subset = question_type == "IH")
-
-## Effects of manipulation on ought inferences: t-test between conditions on ought measure
-t.test(response ~ condition, data_tidy, subset = question_type == "O")
-
-
-## Effects of manipulation on ought inferences via inherence bias: mediation analysis from condition to inherence heuristic scale to ought measure
-
-# Average inherence bias and ought measure per subject
-data_means_subj <- data_tidy %>% 
-  group_by(subject, condition, question_type) %>%  
-  summarize(avg=mean(response, na.rm=TRUE)) %>% 
-  spread(question_type, avg)
-
-# condition coded as 0 (=control) or 1 (=anti_inherence) factor
-data_means_subj$condition <- gsub('control', '0', data_means_subj$condition)
-data_means_subj$condition <- gsub('anti_inherence', '1', data_means_subj$condition)
-data_means_subj$condition <- as.numeric(as.character(data_means_subj$condition))
-
-# condition to ought measure (x->y)
-model.0 <- lm(O ~ condition, data_means_subj)
-summary(model.0)
-
-# condition to inherence bias (x->m)
-model.M <- lm(IH ~ condition, data_means_subj)
-summary(model.M)
-
-# condition and inherence bias to ought measure (x+m -> y)
-model.Y <- lm(O ~ condition + IH, data_means_subj)
-summary(model.Y)
-
-set.seed(1234)
-results <- mediation::mediate(model.M, model.Y, treat="condition", mediator="IH", boot=TRUE, sims=500)
-summary(results)
+# Pearson correlation between each subject's inherence bias measure and their ought measure 
+cor.test(data_means_subj$IH, data_means_subj$O, method = "pearson")
 
 ```
 
-[Original graph](C:\Users\Marianna\Desktop\Dropbox\Stanford\methods\tworek2016\original_paper_Exp4_Fig2.png)
 
 ###Exploratory analyses
 
