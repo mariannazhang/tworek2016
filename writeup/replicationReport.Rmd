@@ -126,12 +126,12 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 
-```{r "knitr config", cache = FALSE, include=FALSE}
+```{r "knitr config", cache = FALSE}
 require("knitr")
 ```
 
 
-```{r include=F}
+```{r}
 ### Data Preparation
 
 
@@ -141,7 +141,7 @@ library(tidyverse)
 
 
 #### Import data for analysis
-data <- read_csv("../data/Exp1_pilotA.csv")
+data <- read_csv("../data/Exp1_pilotB.csv")
 
 
 #### Initial data formatting
@@ -200,9 +200,17 @@ data_means_subj
 The analyses as specified in the analysis plan. 
 *Side-by-side graph with original graph is ideal here*
 
-```{r include=F}
+```{r}
 # Pearson correlation between each subject's inherence bias measure and their ought measure 
 cor.test(data_means_subj$IH, data_means_subj$O, method = "pearson")
+
+# scatterplot of inherence bias measure and ought measure
+ggplot(data_means_subj, aes(x = IH, y = O)) + 
+  geom_point() + 
+  labs(x="Inherence bias measure", 
+       y="Ought measure") +
+  geom_smooth(method = "lm") +
+  ggtitle("Inherence bias measure is correlated with ought measure")
 
 ```
 
