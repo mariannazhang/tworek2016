@@ -142,7 +142,6 @@ require("knitr")
 library(tidyverse)
 
 
-
 #### Import data for analysis
 # pilot A = self (included because pilot B data is insufficient for analysis to run)
 data_A <- read_csv("../data/Exp1_pilotA.csv")
