@@ -104,10 +104,13 @@ A Pearson correlation will be derived between subjects' inherence bias measure a
 
 Two control measures, fluid intelligence (Raven's Progressive Matrices) and belief-in-a-just-world, were omitted out of cost concerns. The final analysis in this study finds the Pearson correlation between subjects' inherence bias measure and ought measure, without controlling for any control measures. Given that the original study reported a significant correlation without controlling for any control measures, as well as a significant correlation with controlling for control measures, this analysis plan is also expected to find a significant correlation without controlling for any control measures. Controlling for control measures should increase the signal, so failing to control for the control measures should merely add noise.
 
+The sample size is smaller (n=82) than the original (n=122) to achieve 80% power if the effect size is the same as what they found.
+
 In addition, the original study paid its Amazon Mechanical Turk participants 75 cents for completing the study. In this replication, participants will be paid 1.25, which is the current federal minimum wage for the expected time to completion. This increase in subject payment is not predicted to affect the result of the replication, since the increase is a trivial amount. 
 
 Finally, in the demographics section, participants are asked for their age instead of their date of birth out of concerns about identifiable information. This change should have no affect on the result, since demographics is the final task and no analysis was performed on demographic information.
 
+<!-- 
 ### Methods Addendum (Post Data Collection)
 
 You can comment this section out prior to final report with data collection.
@@ -117,7 +120,7 @@ You can comment this section out prior to final report with data collection.
 
 #### Differences from pre-data collection methods plan
   Any differences from what was described as the original plan, or “none”.
-
+-->
 
 ##Results
 
@@ -141,34 +144,73 @@ library(tidyverse)
 
 
 #### Import data for analysis
-data <- read_csv("../data/Exp1_pilotB.csv")
+# pilot A = self (included because pilot B data is insufficient for analysis to run)
+data_A <- read_csv("../data/Exp1_pilotA.csv")
+# pilot B = naive participants (n=3)
+data_B <- read_csv("../data/Exp1_pilotB.csv")
 
 
 #### Initial data formatting
+# combine data
+data_A <- mutate(data_A, dataset = "pilotA")
+data_B <- mutate(data_B, dataset = "pilotB")
+
+data <- bind_rows(data_A, data_B)
+
+
 # Filter out those who didn't consent
 data <- data %>%
-  filter(consent == "I agree") # Exclude those who didn't give consent
+  filter(consent == "I agree")
 
-# select relevant columns
+
+# Select relevant columns
 data <- data %>%
   dplyr::select(IH_1:IH_C2, # inherence heuristic scale
          O_1, O_2, O_3, O_4, O_5, O_6, # ought inferences
-         attn)# attention check
+         attn, # attention check
+         debrief_1:debrief_4, 
+         dataset) # debriefing
 
 # Add subject ID
 data <- mutate(data, subject = row_number())
 
-# Remove all strings (mainly Likert scale labels)
+# Remove all strings in task response columns (mainly Likert scale labels)
 data <- data %>% 
   mutate_at(vars(IH_1:O_6), ~gsub("([a-z]|[A-Z]|\\s)*", "", .)) %>% 
   mutate_at(vars(IH_1:O_6), as.numeric)
 
 
+
 #### Data exclusion / filtering
+## Record exclusions
+
+# replace NAs in debriefing questions with text " " to prep for str_detect, which can't handle NAs
+data$debrief_1 <- str_replace_na(data$debrief_1, " ")
+data$debrief_2 <- str_replace_na(data$debrief_2, " ")
+data$debrief_3 <- str_replace_na(data$debrief_1, " ")
+data$debrief_4 <- str_replace_na(data$debrief_1, " ")
+
+# record exclusions
+data_excl <- tibble(
+  attn = sum(data$attn != "Yes" | is.na(data$attn)), 
+  IH_C = sum(data$IH_C1 != 3 | is.na(data$IH_C1)) 
+  + sum(data$IH_C2 != 7 | is.na(data$IH_C2)),
+  non_naive = sum(str_detect(data$debrief_1, "is-ought"))
+  + sum(str_detect(data$debrief_2, "is-ought"))
+  + sum(str_detect(data$debrief_3, "is-ought"))
+  + sum(str_detect(data$debrief_4, "is-ought")))
+data_excl
+
+## Excluding subjects
 data <- data %>%
-  filter(attn == "Yes" | # Exclude those who didn't pay attention
-        IH_C1 !=3 | IH_C2 !=7) %>% # Exclude those who failed control questions on the inherence heuristic scale 
-  dplyr::select(-attn, -(IH_C1:IH_C2)) # Delete attn and inherence heuristic scale control columns
+  filter(attn == "Yes" & # Exclude those who didn't pay attention
+        IH_C1 == 3 & IH_C2 == 7 & # Exclude those who didn't answer correctly on control questions on the inherence heuristic scale
+        !str_detect(debrief_1, "is-ought") & 
+        !str_detect(debrief_2, "is-ought") & 
+        !str_detect(debrief_3, "is-ought") & 
+        !str_detect(debrief_4, "is-ought")) %>%  # Exclude those who mentioned "is-ought" in debriefing
+  select(-attn, -(IH_C1:IH_C2), -(debrief_1:debrief_4)) # Delete attn and inherence heuristic scale control columns
+
 
 
 #### Prepare data for analysis - create columns etc.
@@ -188,21 +230,30 @@ data_means
 
 # summarize inherence bias and ought measure per subject
 data_means_subj <- data_tidy %>% 
-  group_by(subject, question_type) %>%  
+  group_by(subject, question_type, dataset) %>%  
   summarize(avg=mean(response, na.rm=TRUE)) %>% 
   spread(question_type, avg)
 data_means_subj
+
+
+
+
+
+
+# A short analysis of participant demographics. Participant demographics may be a big reason why you get the result you do, so it'll be important for readers to know about them. 
 
 ```
 
 ### Confirmatory analysis
 
 The analyses as specified in the analysis plan. 
-*Side-by-side graph with original graph is ideal here*
+
+The original result was r(120) = .30, 95% CI = [.13, .46], p < .001.
 
 ```{r}
-# Pearson correlation between each subject's inherence bias measure and their ought measure 
-cor.test(data_means_subj$IH, data_means_subj$O, method = "pearson")
+# If time - scatterplot of inherence bias measure and ought measure in original data
+
+
 
 # scatterplot of inherence bias measure and ought measure
 ggplot(data_means_subj, aes(x = IH, y = O)) + 
@@ -210,21 +261,41 @@ ggplot(data_means_subj, aes(x = IH, y = O)) +
   labs(x="Inherence bias measure", 
        y="Ought measure") +
   geom_smooth(method = "lm") +
+  # Ought measure is 1 to 9 scale
+  scale_y_continuous(limits=c(1,9), breaks=seq(1, 9, 1)) +
+  # Inherence bias measure is 1 to 9 scale
+  scale_x_continuous(limits=c(1,9), breaks=seq(1, 9, 1)) +
   ggtitle("Inherence bias measure is correlated with ought measure")
 
-```
 
+# Pearson correlation between each subject's inherence bias measure and their ought measure 
+cor <- cor.test(data_means_subj$IH, data_means_subj$O, method = "pearson")
+cor
+
+
+
+
+# difference between this correlation and original study's correlation (r(120) = .30, 95% CI = [.13, .46], p < .001)
+diff_cor <- cor$estimate - 0.30
+diff_cor
+
+
+
+
+
+```
+The result in this replication was r(`r cor$parameter`) = `r round(cor$estimate, 2)`, 95% CI = [`r round(cor$conf.int[1], 2)`, `r round(cor$conf.int[2], 2)`], p = `r cor$p.value`.
 
 ###Exploratory analyses
 
-Any follow-up analyses desired (not required).  
+<!-- Any follow-up analyses desired (not required). --> 
 
 ## Discussion
 
 ### Summary of Replication Attempt
 
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+<!-- Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.-->
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+<!-- Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.-->
