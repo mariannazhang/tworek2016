@@ -149,6 +149,8 @@ data_A <- read_csv("../data/Exp1_pilotA.csv")
 data_B <- read_csv("../data/Exp1_pilotB.csv")
 
 
+
+
 #### Initial data formatting
 # combine data
 data_A <- mutate(data_A, dataset = "pilotA")
