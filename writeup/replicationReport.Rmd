@@ -143,21 +143,11 @@ library(tidyverse)
 
 
 #### Import data for analysis
-# pilot A = self (included because pilot B data is insufficient for analysis to run)
-data_A <- read_csv("../data/Exp1_pilotA.csv")
-# pilot B = naive participants (n=3)
-data_B <- read_csv("../data/Exp1_pilotB.csv")
+data <- read_csv("../data/Exp1_finalData.csv")
 
 
 
 #### Initial data formatting
-# combine data
-data_A <- mutate(data_A, dataset = "pilotA")
-data_B <- mutate(data_B, dataset = "pilotB")
-
-data <- bind_rows(data_A, data_B)
-
-
 # Filter out those who didn't consent
 data <- data %>%
   filter(consent == "I agree")
@@ -169,16 +159,15 @@ data <- data %>%
          O_1, O_2, O_3, O_4, O_5, O_6, # ought inferences
          attn, # attention check
          debrief_1:debrief_4, # debriefing
-         gender, age, education, income, religion, race, conservatism, English, #demographics
-         dataset) # pilot A vs pilot B
+         gender, age, education, income, religion, race, conservatism, English) #demographics
 
 # Add subject ID
 data <- mutate(data, subject = row_number())
 
-# Remove all strings in task response columns (mainly Likert scale labels)
+# Remove all strings in task response columns and conservatism question (mainly Likert scale labels)
 data <- data %>% 
-  mutate_at(vars(IH_1:O_6), ~gsub("([a-z]|[A-Z]|\\s)*", "", .)) %>% 
-  mutate_at(vars(IH_1:O_6), as.numeric)
+  mutate_at(vars(IH_1:O_6, conservatism), ~gsub("([a-z]|[A-Z]|\\s)*", "", .)) %>% 
+  mutate_at(vars(IH_1:O_6, conservatism), as.numeric)
 
 
 
@@ -267,7 +256,7 @@ data_means
 
 # summarize inherence bias and ought measure per subject
 data_means_subj <- data_tidy %>% 
-  group_by(subject, question_type, dataset) %>%  
+  group_by(subject, question_type) %>%  
   summarize(avg=mean(response, na.rm=TRUE)) %>% 
   spread(question_type, avg)
 data_means_subj
