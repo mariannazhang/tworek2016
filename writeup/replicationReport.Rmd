@@ -32,7 +32,7 @@ Adults on Mechanical Turk were administered a task that assessed their preferenc
 
 The study will be easy to adminster and run, since it involves surveys administered on MTurk. 
 
-The [repository for the replication](https://github.com/mariannazhang/tworek2016) and the [original paper](https://github.com/mariannazhang/tworek2016/blob/master/original_paper.pdf) can be found online. 
+The [repository for the replication](https://github.com/psych251/tworek2016), the [preregistration for the replication](https://osf.io/g5jvq/), and the [original paper](https://github.com/psych251/tworek2016/blob/master/original_paper.pdf) can be found online. 
 
 
 ##Methods
@@ -110,17 +110,29 @@ In addition, the original study paid its Amazon Mechanical Turk participants \$0
 
 Finally, in the demographics section, participants are asked for their age instead of their date of birth out of concerns about identifiable information, and race, income, and religion were changed from from free response to multiple choice as to make demographic reporting easier. These changes should have no affect on the target result, since demographics is the final set of questions, and the target analysis does not involve controlling for any of these factors.
 
-<!-- 
+
 ### Methods Addendum (Post Data Collection)
-
-You can comment this section out prior to final report with data collection.
-
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+The final sample size was 74 participants located in the US and recruited on Amazon Mechanical Turk. 8 additional participants were excluded for failing at least one control question in the inherence heuristic task. 
+
+Of the included 74 participants:
+* Gender. 34 were female and 40 were male.
+* Race. 60 were monoracial white, 6 monoracial black, 4 monoracial Asian, 1 monoracial Latino/a, and 2 multiracial.
+* Age. 22 were between 20 and 29 years of age, 30 between 30 and 39 years of age, 10 between 40 and 49 years of age, 9 between 50 and 59 years of age, and 3 60 years of age or older.
+* Income. 3 were in the $5,000 to $10,000 income bracket, 4 in the $10,000 to $15,000 bracket, 9 in the $15,000 to $25,000 bracket, 11 in the $25,000 to $35,000 bracket, 12 in the $35,000 to $50,000 bracket, 14 in the $50,000 to $65,000 bracket, 10 in the $65,000 to $80,000 bracket, 6 in the $80,000 to $100,000 bracket, and 5 in the over $100,000 bracket. 
+* Religion. 17 were Protestant, 12 were Roman Catholic, 1 was Orthodox, 1 was Mormon, 4 were Jewish, 3 were Muslim, 2 were Buddhist, 14 were agnostic, 14 were atheist, 3 were nothing in particular, and 3 were other. 
+* Political views. 36 were liberal (1-3 on 9-point political views scale), 24 were moderate (4-6), and 14 were conservative. 
+* Education. 13 had completed high school or a GED, 31 had completed some college, 23 had completed a bachelor's degree, 6 had completed a master's degree, and 1 had completed a doctoral degree. 
+
+
+
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
--->
+None.
+
+
+
+
 
 ##Results
 
@@ -182,8 +194,7 @@ data$debrief_4 <- str_replace_na(data$debrief_1, " ")
 # record exclusions
 data_excl <- tibble(
   attn = sum(data$attn != "Yes" | is.na(data$attn)), 
-  IH_C = sum(data$IH_C1 != 3 | is.na(data$IH_C1)) 
-  + sum(data$IH_C2 != 7 | is.na(data$IH_C2)),
+  IH_C = sum(data$IH_C1 != 3 | is.na(data$IH_C1) | data$IH_C2 != 7 | is.na(data$IH_C2)),
   non_naive = sum(str_detect(data$debrief_1, "is-ought"))
   + sum(str_detect(data$debrief_2, "is-ought"))
   + sum(str_detect(data$debrief_3, "is-ought"))
@@ -227,7 +238,7 @@ data_demographics_religion <- data %>%
   count(religion)
 data_demographics_religion
 
-# race -> how to count for multiple selections?
+# race
 data_demographics_race <- data %>%
   count(race)
 data_demographics_race
@@ -247,6 +258,8 @@ data_tidy <- data %>%
 # classify items as inherence heuristic questions vs ought questions
 data_tidy <- data_tidy %>% 
   separate(question, c("question_type", "question_number"), "_")
+
+
 
 # summarize inherence bias average and ought measure average across subjects
 data_means <- data_tidy %>%
@@ -277,7 +290,7 @@ The original result was r(120) = .30, 95% CI = [.13, .46], p < .001.
 ```{r}
 ### Analysis of replication data
 # scatterplot of inherence bias measure and ought measure
-ggplot(data_means_subj, aes(x = IH, y = O)) + 
+p <- ggplot(data_means_subj, aes(x = IH, y = O)) + 
   geom_point() + 
   labs(x="Inherence bias measure", 
        y="Ought measure") +
@@ -292,6 +305,7 @@ ggplot(data_means_subj, aes(x = IH, y = O)) +
 # Pearson correlation between each subject's inherence bias measure and their ought measure 
 cor <- cor.test(data_means_subj$IH, data_means_subj$O, method = "pearson")
 cor
+
 
 
 
@@ -319,7 +333,7 @@ data_original <- data_original %>%
          O = oughtav)
 
 # scatterplot of inherence bias measure and ought measure
-ggplot(data_original, aes(x = IH, y = O)) + 
+p_original <- ggplot(data_original, aes(x = IH, y = O)) + 
   geom_point() + 
   labs(x="Inherence bias measure", 
        y="Ought measure") +
@@ -347,7 +361,7 @@ cor_original
 diff_cor <- cor$estimate - cor_original$estimate
 diff_cor
 
-
+gridExtra::grid.arrange(p_original, p, nrow = 1)
 
 
 
@@ -355,8 +369,117 @@ diff_cor
 The result in this replication was r(`r cor$parameter`) = `r round(cor$estimate, 2)`, 95% CI = [`r round(cor$conf.int[1], 2)`, `r round(cor$conf.int[2], 2)`], p = `r cor$p.value`.
 
 ###Exploratory analyses
-
 <!-- Any follow-up analyses desired (not required). --> 
+
+```{r}
+# SPREAD: more spread in replication data than original data?
+# replication: inherence bias measure and ought meaure across subjects
+data_means
+
+# original: spread in inherence bias measure and ought measure across subjects
+data_original_spread <- data_original %>%
+  summarize_at(vars(IH, O), sd)
+data_original_spread
+```
+
+The data from the replication attempt seems to exhibit more spread (inherence measure SD = `r data_means[data_means$question_type == "IH",]$sd`, ought measure SD = `r data_means[data_means$question_type == "O",]$sd`) than the original data (inherence measure SD = `r data_original_spread$IH`, ought measure SD = `r data_original_spread$O`).
+
+
+
+
+```{r}
+# ITEM DIFFERENCES WITHIN SCALES IN REPLICATION?
+# create function to estimate confidence interval
+sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(sum(!is.na((x))))}
+ci <- function(x) {sem(x) * 1.96} # reasonable approximation 
+
+# inherence bias item and ought measure item averages
+data_tidy$question_number <- as.numeric(data_tidy$question_number)
+
+data_IH_items <- data_tidy %>% 
+  filter(question_type == "IH") %>% 
+  group_by(question_number) %>% 
+  summarize(avg=mean(response, na.rm=TRUE), ci=ci(response), n())
+data_IH_items
+
+data_O_items <- data_tidy %>% 
+  filter(question_type == "O") %>% 
+  group_by(question_number) %>% 
+  summarize(avg=mean(response, na.rm=TRUE), ci=ci(response), n())
+data_O_items
+
+# bar graph of item averages
+ggplot(data_IH_items, aes(x = question_number, y = avg)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = avg - ci, ymax = avg + ci), 
+                width=.2) + 
+  labs(title = "Average rating per inherence heuristic item", x = "Item", y = "Average rating (1 [disagree strongly] to 9 [agree strongly])") +
+  scale_y_continuous(limits = c(1,9), breaks = 1:9) +
+  scale_x_continuous(breaks = 1:15) +
+  theme(panel.grid.minor = element_blank())
+
+ggplot(data_O_items, aes(x = question_number, y = avg)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = avg - ci, ymax = avg + ci), 
+                width=.2) + 
+  labs(title = "Average rating per ought measure item", x = "Item", y = "Average rating (1 [really not good] to 9 [really good])") +
+  scale_y_continuous(limits = c(1,9), breaks = 1:9) +
+  scale_x_continuous(breaks = 1:15) +
+  theme(panel.grid.minor = element_blank())
+
+
+```
+
+
+Within the replication data, there appears to be some variance between items on the inherence bias measure and the ought measure. 
+
+Awareness of negative consequences and centrality to one's own life are likely factors in how people rated ought items. For an example, the lowest rated ought item was ought item 3 about driving to work, likely because most people are aware of the harmful environmental conequences of driving. The highest rated ought item was ought item 5 about email use, likely because people are not aware of any negative consequences and email is usually critical to people's work and life. 
+
+Awareness of variation and the cultural frequency of the proposed inherent explanation likely influenced how people rated inherence items. The lowest rated inherence item was inherence item 4 about the use of green in currency because green intrinsically signals trust. This explanation was perhaps rated most dubious because people are aware of variance in the color of currency across currency areas, and because green does not culturally signal trust in the US. The highest rated inherence item was inherence item 1 about the use of red in traffic lights because red intrinsically signals a warning. This explanaton was perhaps most appealing because people do not know of variance in the color of traffic lights, and because red does symbolize a warning in many contexts, including in traffic lights. 
+
+
+
+
+```{r}
+# CORRELATION ACROSS POLITICAL VIEWS, OR EDUCATION?
+# summarize inherence bias and ought measure per subject, keeping political view and edu
+data_tidy$education <- ordered(data_tidy$education, levels = c("High school/GED", "Some college", "Bachelor's (B.A., B.S.)", "Master's (M.A., M.S.)", "Doctoral (Ph.D., J.D., M.D.)"))
+
+data_means_subj_conservatism_edu <- data_tidy %>% 
+  group_by(subject, question_type, conservatism, education) %>%  
+  summarize(avg=mean(response, na.rm=TRUE)) %>% 
+  spread(question_type, avg)
+
+# scatterplot of inherence bias measure and ought measure, by political view
+ggplot(data_means_subj_conservatism_edu, aes(x = IH, y = O, color = conservatism)) + 
+  geom_point() + 
+  labs(x="Inherence bias measure", 
+       y="Ought measure") +
+  geom_smooth(method = "lm") +
+  # Ought measure is 1 to 9 scale
+  scale_y_continuous(limits=c(1,9), breaks=seq(1, 9, 1)) +
+  # Inherence bias measure is 1 to 9 scale
+  scale_x_continuous(limits=c(1,9), breaks=seq(1, 9, 1)) +
+  ggtitle("Replication: inherence bias measure and ought measure correlation by political view")
+
+# scatterplot of inherence bias measure and ought measure, by education
+ggplot(data_means_subj_conservatism_edu, aes(x = IH, y = O, color = education)) + 
+  geom_point() + 
+  labs(x="Inherence bias measure", 
+       y="Ought measure") +
+  geom_smooth(method = "lm", se = FALSE) +
+  # Ought measure is 1 to 9 scale
+  scale_y_continuous(limits=c(1,9), breaks=seq(1, 9, 1)) +
+  # Inherence bias measure is 1 to 9 scale
+  scale_x_continuous(limits=c(1,9), breaks=seq(1, 9, 1)) +
+  ggtitle("Replication: inherence bias measure and ought measure correlation by education")
+
+
+
+```
+
+An analysis of the correlation between participants' inherence bias measure and ought measure by political views and education did not reveal anything of note. 
+
 
 ## Discussion
 
@@ -364,6 +487,17 @@ The result in this replication was r(`r cor$parameter`) = `r round(cor$estimate,
 
 <!-- Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.-->
 
+The result of this replication attempt partially replicated the original result in Tworek & Cimpian 2016, Experiment 1. The result in this replication was a slight correlation between participants' inherence bias measure and ought measure that did not reach statistical significance: r(`r cor$parameter`) = `r round(cor$estimate, 2)`, 95% CI = [`r round(cor$conf.int[1], 2)`, `r round(cor$conf.int[2], 2)`], p = `r cor$p.value`. The original result was r(`r cor_original$parameter`) = `r round(cor_original$estimate, 2)`, 95% CI = [`r round(cor_original$conf.int[1], 2)`, `r round(cor_original$conf.int[2], 2)`], p = `r cor$p.value`. This replication generated a Pearson correlation that although trends positive, is `r abs(diff_cor)` smaller than the original Pearson correlation. In addition, the p-value from this replication did not reach statistical significance, as the original p-value did. 
+
+
+
+
 ### Commentary
 
 <!-- Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.-->
+
+Follow-up exploratory analysis revealed that the replication data exhibited more spread than the original data, perhaps because of the smaller sample size. Additionally, there was some inter-item variance on the inherence bias measure, perhaps due to people's varying awareness of cultural variation on some phenomenon and the cultural dominance of the proposed inherent explanation, as well as on the ought measure, perhaps due to people's varying judgments of negative consequences of some activity and centrality of the activity to their own lives. Lastly, an analysis of the target correlation by political views and education did not reveal anything of note. 
+
+It is unlikely that changes in the study paradigm itself (all minor changes, detailed in the methods section) affected the results of this replication. 
+
+It is possible that the small sample size influenced the results of the replication. The final sample size (n=74) due to planned exclusions was slightly smaller than the sample size needed to achieve 80% power given the original effect size (n=82), and also smaller than the original sample size (n=122). It is possible that the actual effect size is smaller than the effect size found by Tworek & Cimpian 2016, such that the sample size of this replication failed to detect the effect. 
