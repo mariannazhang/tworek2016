@@ -16,7 +16,7 @@ output:
 
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
-##Introduction
+## Introduction
 
 <!-- [No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.-->
 
@@ -35,70 +35,70 @@ The study will be easy to adminster and run, since it involves surveys administe
 The [repository for the replication](https://github.com/psych251/tworek2016), the [preregistration for the replication](https://osf.io/g5jvq/), and the [original paper](https://github.com/psych251/tworek2016/blob/master/original_paper.pdf) can be found online. 
 
 
-##Methods
+## Methods
 
-###Power Analysis
+### Power Analysis
 
-The original effect size was r=0.30. For 80% power, this effect size requires n=82. 
+The original effect size was r=0.30. For 80% power, this effect size requires n=82, as calculated using an a priori two-tailed power analysis in G*Power. 
 
 This sample size is smaller than the original sample size of n=122, which achieved a post-hoc power of 93%.
 
-###Planned Sample
+### Planned Sample
 
 <!-- Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.-->
 
 Planned sample size is 82 adults recruited on Amazon Mechanical Turk. Participants will be required to be located within the United States, and will be required to have a HIT acceptance rate of 80% or above.
 
-###Materials
+### Materials
 <!-- All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
 The following materials were used:
 
-"*Ought inferences.* Participants read six passages that were structured like and derived from actual press releases. The passages described a typical societal practice (i.e., what is). For example, one was titled "America's Pizza Obsession: By The Numbers" and read as follows:
-
+>*Ought inferences.* Participants read six passages that were structured like and derived from actual press releases. The passages described a typical societal practice (i.e., what is). For example, one was titled "America's Pizza Obsession: By The Numbers" and read as follows:
+>
 >The quintessential American food may be apple pie, but its popularity pales beside our national love affair with pizza pies. The Daily reports that Americans consume a staggering 100 acres of pizza a day, according to data from the National Association of Pizza Operators (NAPO). Over $38 billion of pizza is sold in America annually, according to Pizza Today, and 3 billion pizzas are sold in the U.S. each year according to NAPO. 350 slices of pizza are sold every second, according to NAPO, and the average American eats an average of 46 slices of pizza a year, according to Packaged Facts. Overall, a total of 94% of Americans eat pizza (adapted from "America's pizza obsession: By the numbers," 2011). 
-
-After reading each press release, participants were asked five questions: one ought question (e.g., "Do you think it should be that so many Americans eat pizza?" 1 = definitely no, 9 = definitely yes) and four filler questions that served to camouflage the main focus of the study (e.g., "Do you think the amount of pizza sold will grow in the next 5 years?" "What do you think accounts for the current prices of pizza?"). For three of the press releases, the ought question was phrased with "should" (see the example in the first sentence of this paragraph), and for the other three, the ought questions were phrased with "good" - for example, "Do you think that it's good that so many Americans drive to work?" (1 = really not good, 9 = really good), which was presented after a passage claiming that 88% of Americans drive to work. Participants' average scores for the "good" and "should" questions were significantly correlated, r(122) = .37, 95% confidence interval (CI) = [.20, .51], p < .001. 
-
-Note that the press releases were purposely about behaviors that fall outside the scope of most existing accounts of sociomoral reasoning (eating pizza, driving to work, drinking coffee, owning a TV, using e-mail, and watching football) so that our results would highlight the unique contribution of our account. All passages were factual in tone, without evaluative language, to avoid influencing participants' normative judgments (for the full text of the passages, see the Supplemental Material at Open Science Framework, https://osf.io/4kanr/).
-
-Responses to the six ought questions were averaged into a composite score, which we refer to as the ought measure (\alpha = .58). The lowest correlation between a particular question and the average of all six questions (i.e., the lowest item-total correlation) was .33. (Note that the results remained the same when excluding the item with the lowest item-total correlation.) The ought measure served as our main dependent variable.
-
-*Inherence bias.* Fifteen items were used to assess the extent to which participants preferred explanations in terms of inherent facts (e.g., "Black is associated with funerals because of something about the color black or about funerals - maybe because the darkness of black conveys how people feel at funerals"; \alpha = .85; lowest item total correlation = .47; see Table 1 for other sample items). All items were rated using a 9-point scale (1 = disagree strongly, 9 = agree strongly) and were presented in random order. Note that, as with the ought measure, the items in the measure of inherence bias were worded factually and did not contain evaluative language. Two catch items were included to detect inattention (e.g., "Please click on the number three below to indicate that you are paying attention"). Participants who missed either of these attention checks were excluded (n = 7).
-
-*Control measures.* Four control measures were administered to investigate alternative explanations for the predicted relationship between participants' explanations and their ought inferences. These measures tapped into dimensions that could influence both variables of interest, giving rise to a correlation between them in the absence of a causal relationship. First, we measured participants' level of education using a scale from 1, less than high school, to 6, doctoral (Ph.D., J.D., M.D.). Second, we measured their fluid intelligence with one 12-item set of Raven's Progressive Matrices (Raven, 1960; see also Salomon & Cimpian, 2014). Third, we measured participants' political views: "How would you describe your political attitudes?" (1 = strongly liberal, 9 = strongly conservative). (Because higher scores on this measure indicate more conservative attitudes, we occasionally refer to it as a measure of conservatism.)
-
-Fourth, a measure related to the measure of political views assessed participants' belief in a just world: for example, "Basically, the world is a just place" (1 = disagree strongly, 9 = agree strongly; Rubin & Peplau, 1975). Table S1 in the Supplemental Material (at Open Science Framework, https://osf.io/4kanr/) provides descriptive statistics for these measures."
+>
+>After reading each press release, participants were asked five questions: one ought question (e.g., "Do you think it should be that so many Americans eat pizza?" 1 = definitely no, 9 = definitely yes) and four filler questions that served to camouflage the main focus of the study (e.g., "Do you think the amount of pizza sold will grow in the next 5 years?" "What do you think accounts for the current prices of pizza?"). For three of the press releases, the ought question was phrased with "should" (see the example in the first sentence of this paragraph), and for the other three, the ought questions were phrased with "good" - for example, "Do you think that it's good that so many Americans drive to work?" (1 = really not good, 9 = really good), which was presented after a passage claiming that 88% of Americans drive to work. Participants' average scores for the "good" and "should" questions were significantly correlated, r(122) = .37, 95% confidence interval (CI) = [.20, .51], p < .001. 
+>
+>Note that the press releases were purposely about behaviors that fall outside the scope of most existing accounts of sociomoral reasoning (eating pizza, driving to work, drinking coffee, owning a TV, using e-mail, and watching football) so that our results would highlight the unique contribution of our account. All passages were factual in tone, without evaluative language, to avoid influencing participants' normative judgments (for the full text of the passages, see the Supplemental Material at Open Science Framework, https://osf.io/4kanr/).
+>
+>Responses to the six ought questions were averaged into a composite score, which we refer to as the ought measure (\alpha = .58). The lowest correlation between a particular question and the average of all six questions (i.e., the lowest item-total correlation) was .33. (Note that the results remained the same when excluding the item with the lowest item-total correlation.) The ought measure served as our main dependent variable.
+>
+>*Inherence bias.* Fifteen items were used to assess the extent to which participants preferred explanations in terms of inherent facts (e.g., "Black is associated with funerals because of something about the color black or about funerals - maybe because the darkness of black conveys how people feel at funerals"; \alpha = .85; lowest item total correlation = .47; see Table 1 for other sample items). All items were rated using a 9-point scale (1 = disagree strongly, 9 = agree strongly) and were presented in random order. Note that, as with the ought measure, the items in the measure of inherence bias were worded factually and did not contain evaluative language. Two catch items were included to detect inattention (e.g., "Please click on the number three below to indicate that you are paying attention"). Participants who missed either of these attention checks were excluded (n = 7).
+>
+>*Control measures.* Four control measures were administered to investigate alternative explanations for the predicted relationship between participants' explanations and their ought inferences. These measures tapped into dimensions that could influence both variables of interest, giving rise to a correlation between them in the absence of a causal relationship. First, we measured participants' level of education using a scale from 1, less than high school, to 6, doctoral (Ph.D., J.D., M.D.). Second, we measured their fluid intelligence with one 12-item set of Raven's Progressive Matrices (Raven, 1960; see also Salomon & Cimpian, 2014). Third, we measured participants' political views: "How would you describe your political attitudes?" (1 = strongly liberal, 9 = strongly conservative). (Because higher scores on this measure indicate more conservative attitudes, we occasionally refer to it as a measure of conservatism.)
+>
+>Fourth, a measure related to the measure of political views assessed participants' belief in a just world: for example, "Basically, the world is a just place" (1 = disagree strongly, 9 = agree strongly; Rubin & Peplau, 1975). Table S1 in the Supplemental Material (at Open Science Framework, https://osf.io/4kanr/) provides descriptive statistics for these measures."
 
 
 Two control measures - belief-in-a-just-world scale, Raven's Progressive Matrices - were omitted for reasons of study duration and costs, and since the original study found a significant correlation between inherence bias measure and ought measure even without controlling for any of the four control measures. 
 
-###Procedure	
+### Procedure	
 
 <!-- Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
 The following procedure was followed, with exceptions noted below:
 
-"Participants were tested online via Qualtrics (Qualtrics Labs Inc., Provo, UT). The ought measure, the measure of inherence bias, the belief-in-a-just-world scale, and Raven's Progressive Matrices were presented in random order. Item order was randomized for all scales except Raven's Progressive Matrices, which were presented in increasing order of difficulty. The measures of participants' education and conservatism were administered at the end of the sessions, along with other demographic questions. Finally, participants were debriefed."
+>Participants were tested online via Qualtrics (Qualtrics Labs Inc., Provo, UT). The ought measure, the measure of inherence bias, the belief-in-a-just-world scale, and Raven's Progressive Matrices were presented in random order. Item order was randomized for all scales except Raven's Progressive Matrices, which were presented in increasing order of difficulty. The measures of participants' education and conservatism were administered at the end of the sessions, along with other demographic questions. Finally, participants were debriefed.
 
 The ought measure and inherence bias were presented in random order. Two control measures - belief-in-a-just-world scale and fluid intelligence (a 12-item set of Raven's Progressive Matrices) - were omitted for reasons of study duration and costs, and since the original study found a significant correlation between inherence bias measure and ought measure even without controlling for any of the four control measures. In demographics, participants were asked for their age instead of DOB out of concerns about identifiable information.
 
 The survey paradigm, adapted from the original survey paradigm, can be found [on Qualtrics](https://stanforduniversity.qualtrics.com/jfe/form/SV_298GpHbVEYbI5GB). 
 
-###Analysis Plan
+### Analysis Plan
 
 <!-- Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
 
 **Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.-->
 
-####Exclusion criteria
+#### Exclusion criteria
 Participants will be excluded if they do not provide the answer they are told to provide to any of the two catch items on the Inherence Heuristic Scale manipulation catch, or if they indicate during debriefing that they had not paid attention. 
 
-####Analysis of interest
+#### Analysis of interest
 A Pearson correlation will be derived between subjects' inherence bias measure and ought measure. The Pearson correlation is expected to be positive and statistically significant (p<0.05).
 
 
-###Differences from Original Study
+### Differences from Original Study
 
 <!-- Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.-->
 
@@ -113,9 +113,10 @@ Finally, in the demographics section, participants are asked for their age inste
 
 ### Methods Addendum (Post Data Collection)
 #### Actual Sample
-The final sample size was 74 participants located in the US and recruited on Amazon Mechanical Turk. 8 additional participants were excluded for failing at least one control question in the inherence heuristic task. 
+The final sample size was 74 participants located in the US and recruited on Amazon Mechanical Turk, which provides 75% power on an effect size of r = 0.30, as calculated using a post-hoc two-tailed power analysis in G*Power. 8 additional participants were excluded for failing at least one control question in the inherence heuristic task. 
 
 Of the included 74 participants:
+
 * Gender. 34 were female and 40 were male.
 * Race. 60 were monoracial white, 6 monoracial black, 4 monoracial Asian, 1 monoracial Latino/a, and 2 multiracial.
 * Age. 22 were between 20 and 29 years of age, 30 between 30 and 39 years of age, 10 between 40 and 49 years of age, 9 between 50 and 59 years of age, and 3 60 years of age or older.
@@ -128,7 +129,7 @@ Of the included 74 participants:
 
 
 #### Differences from pre-data collection methods plan
-None.
+The final sample size (n=74) was smaller than the planned sample size (n=82) due to planned exclusions.
 
 
 
@@ -366,6 +367,8 @@ gridExtra::grid.arrange(p_original, p, nrow = 1)
 
 
 ```
+
+
 The result in this replication was r(`r cor$parameter`) = `r round(cor$estimate, 2)`, 95% CI = [`r round(cor$conf.int[1], 2)`, `r round(cor$conf.int[2], 2)`], p = `r cor$p.value`.
 
 ###Exploratory analyses
@@ -496,7 +499,7 @@ The result of this replication attempt partially replicated the original result 
 
 <!-- Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.-->
 
-Follow-up exploratory analysis revealed that the replication data exhibited more spread than the original data, perhaps because of the smaller sample size. Additionally, there was some inter-item variance on the inherence bias measure, perhaps due to people's varying awareness of cultural variation on some phenomenon and the cultural dominance of the proposed inherent explanation, as well as on the ought measure, perhaps due to people's varying judgments of negative consequences of some activity and centrality of the activity to their own lives. Lastly, an analysis of the target correlation by political views and education did not reveal anything of note. 
+Follow-up exploratory analysis revealed that the replication data exhibited more spread than the original data. Additionally, there was some inter-item variance on the inherence bias measure, perhaps due to people's varying awareness of cultural variation on some phenomenon and the cultural dominance of the proposed inherent explanation, as well as on the ought measure, perhaps due to people's varying judgments of negative consequences of some activity and centrality of the activity to their own lives. Lastly, an analysis of the target correlation by political views and education did not reveal anything of note. 
 
 It is unlikely that changes in the study paradigm itself (all minor changes, detailed in the methods section) affected the results of this replication. 
 
